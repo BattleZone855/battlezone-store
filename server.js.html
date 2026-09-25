@@ -1,0 +1,34 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/>const express = require("express");
+const app = express();
+const path = require("path");
+
+app.use(express.json());
+app.use(express.static("public"));
+
+let orders = [];
+
+// guardar pedidos
+app.post("/order", (req, res) => {
+    const order = {
+        id: Date.now(),
+        items: req.body.cart,
+        date: new Date().toLocaleString()
+    };
+    orders.push(order);
+    res.json({ status: "ok" });
+});
+
+// ver pedidos
+app.get("/orders", (req, res) => {
+    res.json(orders);
+});
+
+// panel admin
+app.get("/admin", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/admin.html"));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log("Servidor corriendo en puerto " + PORT);
+});

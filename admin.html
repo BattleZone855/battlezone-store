@@ -1,0 +1,25 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+</head>
+<body style="background:#111;color:white;font-family:Arial">
+<h1>Pedidos</h1>
+<div id="orders"></div>
+
+<script>
+async function load(){
+ let res = await fetch("/orders");
+ let data = await res.json();
+ let html="";
+ data.forEach(o=>{
+   html += `<p>${o.date} - ${o.items.length} productos</p>`;
+ });
+ document.getElementById("orders").innerHTML=html;
+}
+load();
+</script>
+
+</body>
+</html>
