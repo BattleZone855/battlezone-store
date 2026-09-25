@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
-background:#121212;
+background:#020617;
 color:white;
 }
 
@@ -18,101 +18,117 @@ nav{
 display:flex;
 justify-content:space-between;
 padding:15px 25px;
-background:#000;
-align-items:center;
+background:#000000aa;
+backdrop-filter: blur(10px);
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .logo{
-font-size:20px;
-font-weight:bold;
-color:#00c3ff;
+font-size:22px;
+color:#00f7ff;
+text-shadow:0 0 10px #00f7ff;
 }
 
 /* HERO */
 .hero{
-padding:40px;
-background:linear-gradient(90deg,#000,#1a1a2e);
+height:250px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(45deg,#020617,#0f172a);
 text-align:center;
 }
 
 .hero h1{
-font-size:32px;
+font-size:42px;
 }
 
 .hero span{
-color:#00c3ff;
-}
-
-.btn{
-display:inline-block;
-margin-top:15px;
-padding:10px 20px;
-background:#00c3ff;
-color:black;
-border-radius:6px;
-text-decoration:none;
-font-weight:bold;
+color:#00f7ff;
+text-shadow:0 0 20px #00f7ff;
 }
 
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:20px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:30px;
 }
 
 /* CARD */
 .card{
-background:#1a1a1a;
-padding:15px;
-border-radius:10px;
-text-align:center;
+background:#0f172a;
+border:1px solid #00f7ff33;
+border-radius:15px;
+overflow:hidden;
 transition:0.3s;
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
 }
 
 .card:hover{
 transform:scale(1.05);
-box-shadow:0 0 15px #00c3ff;
+box-shadow:0 0 25px #00f7ff;
+}
+
+.card-content{
+padding:15px;
+text-align:center;
 }
 
 .price{
-color:#00c3ff;
+color:#00f7ff;
 margin:10px 0;
+font-size:18px;
 }
 
-/* CARRITO */
+/* BUTTON */
+button{
+background:linear-gradient(45deg,#00f7ff,#00c3ff);
+border:none;
+padding:12px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+}
+
+button:hover{
+box-shadow:0 0 15px #00f7ff;
+}
+
+/* CART */
 .cart{
 position:fixed;
 right:0;
 top:0;
 width:260px;
 height:100%;
-background:#000;
+background:#020617;
 padding:15px;
-border-left:1px solid #222;
+border-left:1px solid #00f7ff33;
 }
 
-.cart h2{
-margin-bottom:10px;
-}
+.item{font-size:14px;color:#ccc;}
 
-.item{
-font-size:14px;
-color:#ccc;
-margin-bottom:5px;
-}
-
-/* BOTONES */
-button{
-background:#00c3ff;
-border:none;
-padding:10px;
+/* NOTIFICACIÓN */
+.toast{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#00f7ff;
+color:black;
+padding:10px 15px;
 border-radius:5px;
-font-weight:bold;
-cursor:pointer;
-margin-top:5px;
-width:100%;
+display:none;
 }
 
 /* WHATSAPP */
@@ -121,7 +137,7 @@ position:fixed;
 bottom:20px;
 left:20px;
 background:#25D366;
-padding:15px;
+padding:18px;
 border-radius:50%;
 text-decoration:none;
 }
@@ -130,7 +146,7 @@ text-decoration:none;
 footer{
 text-align:center;
 padding:20px;
-color:#777;
+color:#666;
 }
 </style>
 </head>
@@ -143,34 +159,46 @@ color:#777;
 </nav>
 
 <section class="hero">
-<h1>Compra <span>Pavos y Skins</span> ⚡</h1>
-<p>Entrega rápida • Seguro • +500 clientes</p>
+<h1>Compra <span>Pavos y Skins</span></h1>
+<p>🔥 Entrega inmediata • 100% seguro</p>
 </section>
 
 <div class="grid">
 
 <div class="card">
+<img src="https://i.imgur.com/3ZQ3Z4C.jpg">
+<div class="card-content">
 <h3>1000 Pavos</h3>
 <div class="price">$15.000</div>
 <button onclick="add('1000 Pavos',15000)">Agregar</button>
 </div>
+</div>
 
 <div class="card">
+<img src="https://i.imgur.com/8Km9tLL.jpg">
+<div class="card-content">
 <h3>Pase de batalla</h3>
 <div class="price">$25.000</div>
 <button onclick="add('Pase de batalla',25000)">Agregar</button>
 </div>
-
-<div class="card">
-<h3>Fortnite Crew</h3>
-<div class="price">$30.000</div>
-<button onclick="add('Fortnite Crew',30000)">Agregar</button>
 </div>
 
 <div class="card">
+<img src="https://i.imgur.com/4AiXzf8.jpg">
+<div class="card-content">
+<h3>Fortnite Crew</h3>
+<div class="price">$30.000</div>
+<button onclick="add('Crew',30000)">Agregar</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/ZF6s192.jpg">
+<div class="card-content">
 <h3>Skin aleatoria</h3>
 <div class="price">$10.000</div>
 <button onclick="add('Skin',10000)">Agregar</button>
+</div>
 </div>
 
 </div>
@@ -179,15 +207,14 @@ color:#777;
 <h2>Carrito</h2>
 <div id="items"></div>
 <h3>Total: $<span id="total">0</span></h3>
-
-<button onclick="comprar()">Finalizar compra</button>
+<button onclick="comprar()">Comprar</button>
 </div>
+
+<div class="toast" id="toast">🔥 Alguien compró 1000 Pavos</div>
 
 <a href="https://wa.me/573504449558" class="whatsapp">💬</a>
 
-<footer>
-© 2026 BattleZone Store
-</footer>
+<footer>© 2026 BattleZone Store</footer>
 
 <script>
 let cart=[];
@@ -195,33 +222,44 @@ let cart=[];
 function add(name,price){
 cart.push({name,price});
 render();
+showToast("🛒 Agregado al carrito");
 }
 
 function render(){
 let html="",total=0;
-
 cart.forEach(p=>{
 html+=`<div class="item">${p.name} - $${p.price}</div>`;
 total+=p.price;
 });
-
 document.getElementById("items").innerHTML=html;
 document.getElementById("total").innerText=total;
 document.getElementById("count").innerText=cart.length;
 }
 
 function comprar(){
-fetch("/order",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({cart})
-})
-.then(()=> {
-alert("✅ Pedido enviado");
-cart=[];
-render();
+if(cart.length===0){alert("Agrega algo");return;}
+
+let msg="Hola quiero comprar:%0A";
+cart.forEach(p=>{
+msg+=`- ${p.name} ($${p.price})%0A`;
 });
+
+window.open(`https://wa.me/573504449558?text=${msg}`);
 }
+
+function showToast(text){
+let t=document.getElementById("toast");
+t.innerText=text;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",2000);
+}
+
+/* FAKE COMPRAS */
+setInterval(()=>{
+let productos=["1000 Pavos","Skin","Crew","Pase"];
+let p=productos[Math.floor(Math.random()*productos.length)];
+showToast("🔥 Alguien compró "+p);
+},8000);
 </script>
 
 </body>
