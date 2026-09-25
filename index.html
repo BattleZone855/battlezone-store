@@ -6,10 +6,10 @@
 <title>BattleZone Store</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 
 body{
-background:#020617;
+background:#0b0f1a;
 color:white;
 }
 
@@ -17,55 +17,44 @@ color:white;
 nav{
 display:flex;
 justify-content:space-between;
-padding:15px 25px;
-background:#000000aa;
-backdrop-filter: blur(10px);
+padding:15px;
+background:#000;
 position:sticky;
 top:0;
 z-index:100;
 }
 
 .logo{
-font-size:22px;
-color:#00f7ff;
-text-shadow:0 0 10px #00f7ff;
+font-weight:bold;
+color:#00eaff;
 }
 
 /* HERO */
 .hero{
-height:250px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(45deg,#020617,#0f172a);
+background:url("https://i.imgur.com/Z6X9q9T.jpg") center/cover;
+padding:80px 20px;
 text-align:center;
 }
 
 .hero h1{
-font-size:42px;
-}
-
-.hero span{
-color:#00f7ff;
-text-shadow:0 0 20px #00f7ff;
+font-size:32px;
+text-shadow:0 0 10px black;
 }
 
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-padding:30px;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+padding:20px;
 }
 
 /* CARD */
 .card{
-background:#0f172a;
-border:1px solid #00f7ff33;
-border-radius:15px;
+background:#111827;
+border-radius:12px;
 overflow:hidden;
-transition:0.3s;
+transition:.3s;
 }
 
 .card img{
@@ -74,61 +63,63 @@ height:140px;
 object-fit:cover;
 }
 
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 0 25px #00f7ff;
-}
-
 .card-content{
-padding:15px;
+padding:10px;
 text-align:center;
 }
 
-.price{
-color:#00f7ff;
-margin:10px 0;
-font-size:18px;
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #00eaff;
 }
 
-/* BUTTON */
+.price{
+color:#00eaff;
+margin:5px 0;
+}
+
+/* BOTON */
 button{
-background:linear-gradient(45deg,#00f7ff,#00c3ff);
+background:#00eaff;
 border:none;
-padding:12px;
-border-radius:8px;
+padding:8px;
+border-radius:6px;
+width:100%;
 font-weight:bold;
 cursor:pointer;
-width:100%;
 }
 
-button:hover{
-box-shadow:0 0 15px #00f7ff;
-}
-
-/* CART */
-.cart{
-position:fixed;
-right:0;
-top:0;
-width:260px;
-height:100%;
-background:#020617;
-padding:15px;
-border-left:1px solid #00f7ff33;
-}
-
-.item{font-size:14px;color:#ccc;}
-
-/* NOTIFICACIÓN */
-.toast{
+/* BOTON CARRITO */
+.cart-btn{
 position:fixed;
 bottom:20px;
 right:20px;
-background:#00f7ff;
+background:#00eaff;
 color:black;
-padding:10px 15px;
-border-radius:5px;
-display:none;
+padding:15px;
+border-radius:50%;
+font-size:20px;
+}
+
+/* PANEL CARRITO */
+.cart-panel{
+position:fixed;
+top:0;
+right:-100%;
+width:280px;
+height:100%;
+background:#020617;
+padding:15px;
+transition:.3s;
+}
+
+.cart-panel.active{
+right:0;
+}
+
+.item{
+font-size:14px;
+margin:5px 0;
 }
 
 /* WHATSAPP */
@@ -137,16 +128,15 @@ position:fixed;
 bottom:20px;
 left:20px;
 background:#25D366;
-padding:18px;
+padding:15px;
 border-radius:50%;
-text-decoration:none;
 }
 
 /* FOOTER */
 footer{
 text-align:center;
-padding:20px;
-color:#666;
+padding:15px;
+color:#555;
 }
 </style>
 </head>
@@ -155,18 +145,17 @@ color:#666;
 
 <nav>
 <div class="logo">⚡ BattleZone</div>
-<div>🛒 <span id="count">0</span></div>
+<div onclick="toggleCart()">🛒 <span id="count">0</span></div>
 </nav>
 
 <section class="hero">
-<h1>Compra <span>Pavos y Skins</span></h1>
-<p>🔥 Entrega inmediata • 100% seguro</p>
+<h1>Compra Pavos y Skins 🔥</h1>
 </section>
 
 <div class="grid">
 
 <div class="card">
-<img src="https://i.imgur.com/3ZQ3Z4C.jpg">
+<img src="https://i.imgur.com/8Km9tLL.jpg">
 <div class="card-content">
 <h3>1000 Pavos</h3>
 <div class="price">$15.000</div>
@@ -175,11 +164,11 @@ color:#666;
 </div>
 
 <div class="card">
-<img src="https://i.imgur.com/8Km9tLL.jpg">
+<img src="https://i.imgur.com/3ZQ3Z4C.jpg">
 <div class="card-content">
-<h3>Pase de batalla</h3>
+<h3>Pase batalla</h3>
 <div class="price">$25.000</div>
-<button onclick="add('Pase de batalla',25000)">Agregar</button>
+<button onclick="add('Pase batalla',25000)">Agregar</button>
 </div>
 </div>
 
@@ -203,26 +192,31 @@ color:#666;
 
 </div>
 
-<div class="cart">
+<!-- BOTON CARRITO -->
+<div class="cart-btn" onclick="toggleCart()">🛒</div>
+
+<!-- PANEL -->
+<div class="cart-panel" id="cart">
 <h2>Carrito</h2>
 <div id="items"></div>
 <h3>Total: $<span id="total">0</span></h3>
 <button onclick="comprar()">Comprar</button>
 </div>
 
-<div class="toast" id="toast">🔥 Alguien compró 1000 Pavos</div>
-
 <a href="https://wa.me/573504449558" class="whatsapp">💬</a>
 
-<footer>© 2026 BattleZone Store</footer>
+<footer>© 2026 BattleZone</footer>
 
 <script>
 let cart=[];
 
+function toggleCart(){
+document.getElementById("cart").classList.toggle("active");
+}
+
 function add(name,price){
 cart.push({name,price});
 render();
-showToast("🛒 Agregado al carrito");
 }
 
 function render(){
@@ -246,20 +240,6 @@ msg+=`- ${p.name} ($${p.price})%0A`;
 
 window.open(`https://wa.me/573504449558?text=${msg}`);
 }
-
-function showToast(text){
-let t=document.getElementById("toast");
-t.innerText=text;
-t.style.display="block";
-setTimeout(()=>t.style.display="none",2000);
-}
-
-/* FAKE COMPRAS */
-setInterval(()=>{
-let productos=["1000 Pavos","Skin","Crew","Pase"];
-let p=productos[Math.floor(Math.random()*productos.length)];
-showToast("🔥 Alguien compró "+p);
-},8000);
 </script>
 
 </body>
